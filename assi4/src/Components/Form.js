@@ -46,18 +46,7 @@ const Form = () => {
         setErr({ ...err, lastNameErr: "" });
       }
 
-    if (
-    err.firstNameErr === "" &&
-    err.lastNameErr === "" &&
-    err.bioErr === "" &&
-    fname.length > 0 &&
-    lname.length > 0 &&
-    bio.length > 0 &&
-    email.length > 0 &&
-    ans.length > 0
-    ) {
-    setIsdisabled(false);
-    }
+    
     }
 
     // Bio Validation
@@ -72,11 +61,29 @@ const Form = () => {
         setErr({ ...err, bioErr: "" });
       }
     }
+
+    if ((
+        err.firstNameErr === "" &&
+        err.lastNameErr === "" &&
+        err.bioErr === "" ) &&
+        (fname.length > 0 &&
+        lname.length > 0 &&
+        bio.length > 0 &&
+        email.length > 0 &&
+        ans.length > 0)
+        ) {
+        setIsdisabled(false);
+        }
   };
   //   handling cancel button
 
   const handleCancel = () => {
-    "this.form.reset()";
+    setfName("");
+    setlName("");
+    setEmail("");
+    setQues("");
+    setAns("");
+    setBio("");
   };
 
   //   handling Submit button
@@ -93,7 +100,7 @@ const Form = () => {
 
   return (
     <div className="form-container">
-      <form action="" className="form-control">
+      <form action="" className="form-control" onSubmit={handleSubmit}>
         <label>
           First Name:{" "}
           <span>
@@ -199,14 +206,12 @@ const Form = () => {
           <br />
         </span>
 
-        <button
+        <button type="submit"
           className="btn btn-primary"
-          disabled={isdisabled}
-          onClick={handleSubmit}
-        >
+          disabled={isdisabled}>
           Submit
         </button>
-        <button type="submit" className="btn btn-danger" onClick={handleCancel}>
+        <button type="button" className="btn btn-danger" onClick={handleCancel}>
           Cancel
         </button>
       </form>
